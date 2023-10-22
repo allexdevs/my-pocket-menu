@@ -6,11 +6,11 @@
       My Pocket Menu
     </v-app-bar-title>
     <v-spacer />
-    <v-btn @click="checkRoute('/')" icon to="/" :active="currentRoute == '/'">
+    <v-btn @click="getCurrentRoute" icon to="/" :active="currentRoute === '/'">
       <v-icon icon="mdi-home"></v-icon>
     </v-btn>
-    <v-btn @click="checkRoute('/settings')" icon to="/settings" :active="currentRoute == '/settings'">
-      <v-icon icon="mdi-cogs"></v-icon>
+    <v-btn @click="getCurrentRoute" icon to="/settings" :active="currentRoute === '/settings'">
+      <v-icon icon="mdi-file-document-plus"></v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -24,12 +24,15 @@ export default {
     }
   },
   methods: {
-    checkRoute: function (route) {
-      this.currentRoute = route;
+    getCurrentRoute: function () {
+      setInterval(() => {
+        this.currentRoute = this.$route.fullPath;
+        console.log(this.currentRoute);
+      }, 500);
     }
   },
   mounted() {
-    this.currentRoute = '/';
+    this.getCurrentRoute();
   }
 }
 </script>
